@@ -27,10 +27,16 @@ export default defineEventHandler(async (event) => {
 			return { success: true };
 		} catch (error) {
 			console.error("Error creating user:", error);
-			return { error: "Username already exists" };
+			return createError({
+				statusCode: 400,
+				statusMessage: "Username already exists",
+			});
 		}
 	} catch (error) {
 		console.error("Error handling signup request:", error);
-		return { error: "Failed to process request" };
+		return createError({
+			statusCode: 400,
+			statusMessage: "Failed to process request",
+		});
 	}
 });
