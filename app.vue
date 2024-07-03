@@ -1,8 +1,7 @@
-<template>
-  <div>
-    <Dashboard />
-  </div>
-</template>
 <script setup>
-import Dashboard from '~/components/Dashboard'
+// import { RouterView } from 'vue-router';
 </script>
+
+<template>
+  <NuxtPage />
+</template>

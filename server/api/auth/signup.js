@@ -24,11 +24,20 @@ export default defineEventHandler(async (event) => {
 				username,
 				hashedPassword,
 			]);
-			return { success: true };
+			const user = await db.get(
+				"SELECT id, username FROM users WHERE username = ?",
+				[username]
+			);
+			await setUserSession(event, {
+				user,
+				loggedInAt: new Date(),
+			});
+
+			return { success: true, user };
 		} catch (error) {
 			console.error("Error creating user:", error);
 			return createError({
-				statusCode: 400,
+				statusCode: 409,
 				statusMessage: "Username already exists",
 			});
 		}
