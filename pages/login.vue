@@ -12,6 +12,7 @@
 import AuthForm from "@/components/AuthForm.vue";
 
 const loading = ref(false);
+const router = useRouter();
 
 const login = async (body) => {
 	loading.value = true;
@@ -20,10 +21,11 @@ const login = async (body) => {
 			method: "POST",
 			body,
 		});
-		window.location.href = "/dashboard";
+		router.push({name: 'Dashboard'})
 		loading.value = false;
 	} catch (error) {
-		alert(error.statusMessage);
+		console.log({error});
+		alert(error.statusMessage ||error);
 		loading.value = false;
 	}
 };

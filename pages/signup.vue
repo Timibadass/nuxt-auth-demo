@@ -10,8 +10,9 @@
 
 <script setup>
 import AuthForm from "@/components/AuthForm.vue";
-const loading = ref(false);
 
+const loading = ref(false);
+const router = useRouter();
 
 const register = async (body) => {
 	loading.value = true;
@@ -20,10 +21,10 @@ const register = async (body) => {
 			method: "POST",
 			body,
 		});
-		window.location.href = "/dashboard";
+		router.push({name: 'Dashboard'})
 		loading.value = false;
 	} catch (error) {
-		alert(error.statusMessage);
+		alert(error.statusMessage || error);
 		loading.value = false;
 	}
 };
