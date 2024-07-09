@@ -12,8 +12,9 @@
 </template>
 
 <script setup>
-const { loggedIn, user, clear } = useUserSession();
+const { loggedIn, user, clear, fetch } = useUserSession();
 
+fetch()
 const logout = () => {
 	clear();
 };
