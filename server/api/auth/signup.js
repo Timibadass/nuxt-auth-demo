@@ -28,8 +28,9 @@ export default defineEventHandler(async (event) => {
 				"SELECT id, username FROM users WHERE username = ?",
 				[username]
 			);
+			const userData = { username: user.username };
 			await setUserSession(event, {
-				user,
+				user: userData,
 				loggedInAt: new Date(),
 			});
 

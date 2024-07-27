@@ -34,11 +34,13 @@ export default defineEventHandler(async (event) => {
 				statusCode: 401,
 				statusMessage: "Invalid username or password",
 			});
-		}
+		} else {
+		const userData = {username: user.username};
 		await setUserSession(event, {
-			user,
+			user: userData,
 			loggedInAt: new Date(),
 		});
+		}
 
 		return { success: true, user };
 	} catch (error) {
